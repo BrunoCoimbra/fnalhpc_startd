@@ -1,0 +1,5 @@
+# the format is site name colon batch name. If a site has multiple batch systems, put them inside square brackets
+# If a site has only one batch, the user does not need to specify the batch. This text file automatically let the script select the batch
+# If a site has multiple batches, the script will error out prompting the user to specify a batch with -b option
+summit:lsf
+wc:[slurm,lsf]

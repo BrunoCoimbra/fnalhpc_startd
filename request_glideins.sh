@@ -42,6 +42,28 @@ while getopts 'u:v:s:b:q:n:t:e:' flag; do
   esac
 done
 
+#HK adds Jan 31 2023, there should be site_batch.txt
+result=`awk -F: '{  if ($1 == mysite ) print $2}' mysite=$SITE site_batch.txt`
+# echo $result
+
+if [[ $result == [* ]]; then
+   if [ -z "$BATCH_SYSTEM" ]; then
+      echo "We have multiple batch systems for this site and you are not using -b option to specify. Please select one of $result with -b option"
+      exit 1
+   else
+###########
+      # if batch system is grouped in [] and if you specified one batch with -b, we need to verify
+      if grep -q "$BATCH_SYSTEM" <<< "$result"; then
+          echo "$BATCH_SYSTEM is in $result"
+      else
+          echo "$BATCH_SYSTEM is NOT in $result"
+          exit 1
+      fi
+###########
+   fi
+fi
+# end
+
 echo -e "${GR}====== New glidein request ======${NO_COLOR}"
 export REPO_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 export EDGE_AREA
