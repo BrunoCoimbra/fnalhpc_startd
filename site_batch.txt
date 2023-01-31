@@ -2,4 +2,4 @@
 # If a site has only one batch, the user does not need to specify the batch. This text file automatically let the script select the batch
 # If a site has multiple batches, the script will error out prompting the user to specify a batch with -b option
 summit:lsf
-wc:[slurm,lsf]
+wc:slurm
